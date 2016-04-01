@@ -19,7 +19,7 @@ fi\n'\
 >> ~/.bashrc
 
 # install ros packages
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
     ros-indigo-desktop-full
 
 RUN echo 'source "/opt/ros/indigo/setup.bash"\n\
