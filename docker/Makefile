@@ -10,7 +10,6 @@ help:
 	@echo ""
 
 build:
-		@docker build --tag=ros:indigo-cuda cuda/.
 		@docker build --tag=ros:indigo-caffe caffe/.
 		@docker build --tag=ros:indigo-ros-caffe ros-caffe/.
 		@docker build --tag=ros:indigo-ros-caffe-dev dev/.
