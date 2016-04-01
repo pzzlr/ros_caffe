@@ -1,5 +1,5 @@
 <launch>
-	<arg name="image" default="/image" />
+	<arg name="image" default="/usb_cam/image_raw" />
 
   <include file="$(find ros_caffe)/launch/ros_caffe_webcam.launch">
 	   <arg name="image" value="$(arg image)" />
