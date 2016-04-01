@@ -1,42 +1,41 @@
-FROM ros:indigo-cuda
+FROM nvidia/cuda:7.5-cudnn4-devel-ubuntu14.04
+# https://github.com/BVLC/caffe/blob/master/docker/standalone/gpu/Dockerfile
 
-ENV PYTHONPATH /opt/caffe/python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        cmake \
+        git \
+        wget \
+        libatlas-base-dev \
+        libboost-all-dev \
+        libgflags-dev \
+        libgoogle-glog-dev \
+        libhdf5-serial-dev \
+        libleveldb-dev \
+        liblmdb-dev \
+        libopencv-dev \
+        libprotobuf-dev \
+        libsnappy-dev \
+        protobuf-compiler \
+        python-dev \
+        python-numpy \
+        python-pip \
+        python-scipy && \
+    rm -rf /var/lib/apt/lists/*
 
-# Add caffe binaries to path
-ENV PATH $PATH:/opt/caffe/.build_release/tools
+ENV CAFFE_ROOT=/opt/caffe
+WORKDIR $CAFFE_ROOT
 
-# Get dependencies
-RUN apt-get update && apt-get install -q -y \
-  libprotobuf-dev \
-  libleveldb-dev \
-  libsnappy-dev \
-  libopencv-dev \
-  libhdf5-serial-dev \
-  protobuf-compiler \
-  libboost-all-dev \
-  libgflags-dev \
-  libgoogle-glog-dev \
-  liblmdb-dev \
-  libatlas-base-dev \
-  python-dev \
-  && rm -rf /var/lib/apt/lists/*
+# FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
+ENV CLONE_TAG=master
 
-# Allow it to find CUDA libs
-RUN echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf && \
-  ldconfig
+RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
+    for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
+    mkdir build && cd build && \
+    cmake -DUSE_CUDNN=1 .. && \
+    make -j"$(nproc)"
 
-# Clone the Caffe repo
-RUN cd /opt && git clone https://github.com/BVLC/caffe.git
-
-# Build Caffe core
-RUN cd /opt/caffe && \
-  cp Makefile.config.example Makefile.config && \
-  sed -i '/^#.* USE_CUDNN /s/^#//' Makefile.config && \
-  make all -j$(nproc) && \
-  make test -j$(nproc)
-
-# Add ld-so.conf so it can find libcaffe.so
-ADD caffe-ld-so.conf /etc/ld.so.conf.d/
-
-# Run ldconfig again (not sure if needed)
-RUN ldconfig
+ENV PYCAFFE_ROOT $CAFFE_ROOT/python
+ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
+ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
+RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
