@@ -17,21 +17,16 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
 )
 
-#set(CAFFE_INCLUDEDIR caffe/build/install/include)
-#set(CAFFE_LINK_LIBRARAY caffe/build/install/lib)
-
-set(CAFFE_INCLUDEDIR /opt/caffe/include /opt/caffe/distribute/include /opt/caffe/.build_release/src)
-set(CAFFE_LINK_LIBRARAY /opt/caffe/build/lib)
-
-set(CUDA_INCLUDEDIR /usr/local/cuda/include /usr/local/cuda/src)
-set(CUDA_LINK_LIBRARAY /usr/local/cuda/lib64)
-
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(OpenCV REQUIRED)
-find_package(CUDA REQUIRED)
+# find_package(CUDA REQUIRED)
+find_package(Caffe REQUIRED)
 
 include(FindPkgConfig)
+
+include_directories(${Caffe_INCLUDE_DIRS})
+add_definitions(${Caffe_DEFINITIONS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -130,13 +125,13 @@ catkin_package(
 include_directories( include
     ${catkin_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
-    ${CAFFE_INCLUDEDIR}
-    ${CUDA_INCLUDEDIR}
+    ${Caffe_INCLUDE_DIRS}
+    # ${CUDA_INCLUDEDIR}
 )
 
 # ## Declare a cpp executable
 add_library(ros_caffe  src/ros_caffe.cpp)
-link_directories(${CAFFE_LINK_LIBRARAY})
+link_directories(${Caffe_LINK_LIBRARAY})
 add_executable(ros_caffe_node src/ros_caffe.cpp)
 
 # ## Add cmake target dependencies of the executable/library
@@ -156,7 +151,7 @@ target_link_libraries(ros_caffe_node
     ros_caffe
     glog
     caffe
-    cuda
+    # cuda
 )
 
 #############
@@ -174,11 +169,11 @@ target_link_libraries(ros_caffe_node
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS ros_caffe ros_caffe_node
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(TARGETS ros_caffe ros_caffe_node
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -188,10 +183,10 @@ install(TARGETS ros_caffe ros_caffe_node
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-install(FILES
-   ${ros_caffe_LIBRARIES}
-   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-)
+# install(FILES
+#    ${ros_caffe_LIBRARIES}
+#    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+# )
 
 #############
 ## Testing ##
