@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     ros-indigo-ros-core \
     ros-indigo-openni2-launch \
     ros-indigo-openni2-camera \
+    ros-indigo-usb-cam \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root

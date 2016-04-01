@@ -19,8 +19,8 @@
 		<param name="image_path"    value="$(find ros_caffe)/data/cat.jpg"/>
 		<param name="test_image"    value="true"/>
 
-		<remap from="~image"        to="/camera/rgb/image_raw"/>
-		<remap from="~camera_info"  to="/camera/rgb/camera_info"/>
+		<remap from="~image"        to="/usb_cam/image_raw"/>
+		<remap from="~camera_info"  to="/usb_cam/camera_info"/>
 		<remap from="~predictions"   to="/ros_caffe/predictions"/>
 	</node>
 
