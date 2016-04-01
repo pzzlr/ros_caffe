@@ -1,0 +1,26 @@
+<launch>
+  <arg name="model_path"    default="$(find ros_caffe)/data/deploy.prototxt"/>
+  <arg name="weights_path"  default="$(find ros_caffe)/data/bvlc_reference_caffenet.caffemodel"/>
+  <arg name="mean_file"     default="$(find ros_caffe)/data/imagenet_mean.binaryproto"/>
+  <arg name="label_file"    default="$(find ros_caffe)/data/synset_words.txt"/>
+  <arg name="image_path"    default="$(find ros_caffe)/data/cat.jpg"/>
+  <arg name="test_image"    default="false"/>
+
+  <arg name="image"         default="/usb_cam/image_raw" />
+  <arg name="camera_info"   default="/usb_cam/camera_info" />
+  <arg name="predictions"   default="/ros_caffe/predictions" />
+
+	<node pkg="ros_caffe" type="ros_caffe_node" name="ros_caffe" output="screen">
+		<param name="model_path"    value="$(arg model_path)"/>
+		<param name="weights_path"  value="$(arg weights_path)"/>
+		<param name="mean_file"     value="$(arg mean_file)"/>
+		<param name="label_file"    value="$(arg label_file)"/>
+		<param name="image_path"    value="$(arg image_path)"/>
+		<param name="test_image"    value="$(arg test_image)"/>
+
+		<remap from="~image"        to="$(arg image)"/>
+		<remap from="~camera_info"  to="$(arg camera_info)"/>
+		<remap from="~predictions"   to="$(arg predictions)"/>
+	</node>
+
+</launch>
