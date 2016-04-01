@@ -16,7 +16,7 @@ var serverURL = "ws://" + rosbridgeHost + ":" + rosbridgePort;
 var mjpegViewer;
 
 // The default video topic (can be set in the rosbridge launch file)
-var videoTopic = "/image_raw";
+var videoTopic = "/image";
 
 
 // The mjpeg video quality (percent)
@@ -40,7 +40,7 @@ var ros = new ROSLIB.Ros();
 // Connect to ROS
 function init_ros() {
         ros.connect(serverURL);
-        
+
         // Set the rosbridge host and port values in the form
         document.getElementById("rosbridgeHost").value = rosbridgeHost;
         document.getElementById("rosbridgePort").value = rosbridgePort;
@@ -72,7 +72,7 @@ ros.on('connection', function() {
             if (value != null) {
                 videoTopic = value;
             }
-                
+
             // Create the video viewer
             if (!mjpegViewer) {
                 mjpegViewer = new MJPEGCANVAS.Viewer({
@@ -87,7 +87,7 @@ ros.on('connection', function() {
             }
         });
 
-        
+
         var sub = new ROSLIB.Topic({
                 ros : ros,
                 name : 'ros_caffe/predictions',

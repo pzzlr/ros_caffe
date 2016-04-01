@@ -11,6 +11,9 @@
 		<param name="pixel_format" value="mjpeg" />
 		<param name="camera_frame_id" value="usb_cam" />
 		<param name="io_method" value="mmap"/>
+
+		<remap from="~image_raw"    to="$(arg image)"/>
+		<remap from="~camera_info"  to="$(arg camera_info)"/>
 	</node>
 
 	<include file="$(find ros_caffe)/launch/ros_caffe.launch">
