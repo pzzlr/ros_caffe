@@ -1,4 +1,4 @@
-FROM nvidia/cuda:7.5-cudnn4-devel-ubuntu14.04
+FROM nvidia/cuda:7.5-cudnn5-devel-ubuntu14.04
 # https://github.com/BVLC/caffe/blob/master/docker/standalone/gpu/Dockerfile
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -39,3 +39,4 @@ ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
 ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
 RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
+# RUN ldconfig

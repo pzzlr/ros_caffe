@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
     ros-indigo-rosbridge-server \
     ros-indigo-roswww \
     ros-indigo-mjpeg-server \
+    python-twisted \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
