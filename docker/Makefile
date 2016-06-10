@@ -12,7 +12,7 @@ help:
 build:
 		@docker build --tag=ros:indigo-caffe caffe/.
 		@docker build --tag=ros:indigo-ros-caffe ros-caffe/.
-		@docker build --tag=ros:indigo-ros-caffe-dev dev/.
+		# @docker build --tag=ros:indigo-ros-caffe-dev dev/.
 
 # pull:
 # 	@docker pull ros
