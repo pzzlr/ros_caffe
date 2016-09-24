@@ -54,6 +54,15 @@ docker pull ruffsl/ros_caffe:cpu
 docker pull ruffsl/ros_caffe:gpu
 ```
 
+> You could also build the images locally using the helper make file:
+
+``` terminal
+cd ~/ros_caffe/docker/
+make build_cpu
+# OR
+make build_gpu
+```
+
 ## Running
 To run the example web interface with a webcam, we can launch the node from a new container:
 

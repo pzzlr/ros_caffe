@@ -11,10 +11,10 @@ help:
 	@echo ""
 
 build_gpu:
-		@docker build --tag=ros-caffe:gpu gpu/.
+		@docker build --tag=ruffsl/ros-caffe:gpu gpu/.
 
 build_cpu:
-		@docker build --tag=ros-caffe:cpu cpu/.
+		@docker build --tag=ruffsl/ros-caffe:cpu cpu/.
 
 # pull:
 # 	@docker pull ros
