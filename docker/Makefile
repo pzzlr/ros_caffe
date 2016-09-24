@@ -11,14 +11,10 @@ help:
 	@echo ""
 
 build_gpu:
-		@docker build --tag=gpu:indigo-caffe gpu/caffe/.
-		@docker build --tag=gpu:indigo-ros-caffe gpu/ros-caffe/.
-		@docker build --tag=gpu:indigo-ros-caffe-dev gpu/dev/.
+		@docker build --tag=ros-caffe:gpu gpu/.
 
 build_cpu:
-		@docker build --tag=cpu:indigo-caffe cpu/caffe/.
-		@docker build --tag=cpu:indigo-ros-caffe cpu/ros-caffe/.
-		@docker build --tag=cpu:indigo-ros-caffe-dev cpu/dev/.
+		@docker build --tag=ros-caffe:cpu cpu/.
 
 # pull:
 # 	@docker pull ros

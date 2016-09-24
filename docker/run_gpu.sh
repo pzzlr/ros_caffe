@@ -1,6 +1,6 @@
 #!/bin/sh
 
-xhost +local:root
+# xhost +local:root
 
 nvidia-docker run \
   -it \
@@ -12,11 +12,11 @@ nvidia-docker run \
   --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   --volume="/${PWD}/../ros_caffe/data:/root/catkin_ws/src/ros_caffe/ros_caffe/data" \
   --device /dev/video0:/dev/video0 \
-  gpu:indigo-ros-caffe-dev roslaunch ros_caffe_web ros_caffe_web.launch
+  ros-caffe:gpu roslaunch ros_caffe_web ros_caffe_web.launch
 
-xhost -local:root
+# xhost -local:root
 
-# For openni
+# For openni (don't forget to install openni packages or add them to dockerfile)
 # --device /dev/bus/usb:/dev/bus/usb \
 # --privileged \
 
