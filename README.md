@@ -36,7 +36,7 @@ cd ~/
 git clone https://github.com/ruffsl/ros_caffe.git
 ```
 
-> Then we'll download a model, CaffeNet, to use to generate labeled predictions. This can be done using a small script in the repo to fetch the larger missing caffemodel file.
+> Then we'll download a model, CaffeNet, to use to generate labeled predictions. This can be done using a small python3 script in the repo to fetch the larger missing caffemodel file.
 
 ``` terminal
 cd ~/ros_caffe/ros_caffe/
