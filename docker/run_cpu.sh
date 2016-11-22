@@ -12,7 +12,7 @@ docker run \
   --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   --volume="/${PWD}/../ros_caffe/data:/root/catkin_ws/src/ros_caffe/ros_caffe/data" \
   --device /dev/video0:/dev/video0 \
-  ros-caffe:cpu roslaunch ros_caffe_web ros_caffe_web.launch
+  ruffsl/ros_caffe:cpu roslaunch ros_caffe_web ros_caffe_web.launch
 
 # xhost -local:root
 
