@@ -1,4 +1,4 @@
-FROM kaixhin/cuda-caffe
+FROM kaixhin/cuda-caffe:7.0
 
 # setup environment
 RUN locale-gen en_US.UTF-8
