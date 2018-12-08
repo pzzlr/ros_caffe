@@ -44,7 +44,7 @@ RUN mkdir -p $CATKIN_WS/src
 WORKDIR $CATKIN_WS/src
 
 # clone ros-caffe project
-RUN git clone https://github.com/ruffsl/ros_caffe.git
+RUN git clone https://github.com/pzzlr/ros_caffe.git
 
 # HACK, replacing shell with bash for later source, catkin build commands
 RUN mv /bin/sh /bin/sh-old && \
