@@ -1,4 +1,4 @@
-FROM kaixhin/cuda-caffe:7.0
+FROM kaixhin/cuda-caffe:7.5
 
 # setup environment
 RUN locale-gen en_US.UTF-8
@@ -14,7 +14,8 @@ ENV ROS_DISTRO indigo
 RUN apt-get update && apt-get install --no-install-recommends -y \
       python-rosdep \
       python-rosinstall \
-      python-vcstools && \
+      python-vcstools \
+      dpkg && \
     rm -rf /var/lib/apt/lists/*
 
 # bootstrap rosdep

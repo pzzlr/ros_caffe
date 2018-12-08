@@ -59,7 +59,7 @@ def extractTarfile(filename):
 
 
 if __name__== '__main__':
-    download_url = 'https://copy.com/osJpYRk6eTN2rY0X/caffenet_data.tar.gz?download=1'
-    target_name = 'caffenet_data.tar.gz'
+    download_url = 'http://dl.caffe.berkeleyvision.org/bvlc_reference_caffenet.caffemodel'
+    target_name = 'bvlc_reference_caffenet.caffemodel'
     download_file(download_url, renamed_file=target_name)
-    extractTarfile(target_name)
+    #extractTarfile(target_name)
